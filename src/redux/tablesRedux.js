@@ -1,5 +1,8 @@
 //selectors
 const URL = 'http://localhost:3131/tables'
+export const getAllTables = ({ tables }) => {
+	return tables
+}
 
 // actions
 const createActionName = actionName => `app/tables/${actionName}`
@@ -9,7 +12,7 @@ const EDIT_TABLE = createActionName('EDIT_TABLE')
 // action creators
 export const loadTables = payload => ({ type: LOAD_TABLES, payload })
 export const editTable = payload => ({ type: EDIT_TABLE, payload })
-export const editTableRequest =()=>{
+export const editTableRequest = () => {
 	// return (dispatch)=>{
 	// 	const options = {
 	// 		method: "PATCH",
@@ -18,7 +21,6 @@ export const editTableRequest =()=>{
 	// 		},
 	// 		body: JSON.stringify({})
 	// 	}
-
 	// 	fetch(`${URL}/id`, options).then(()=>dispatch(editTable()))
 	// }
 }
