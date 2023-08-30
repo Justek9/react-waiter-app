@@ -4,6 +4,10 @@ export const getAllTables = ({ tables }) => {
 	return tables
 }
 
+export const getTableById = ({ tables }, id) => {
+	return tables.filter(table => table.id === id)[0]
+}
+
 // actions
 const createActionName = actionName => `app/tables/${actionName}`
 const LOAD_TABLES = createActionName('LOAD_TABLES')
