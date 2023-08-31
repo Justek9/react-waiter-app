@@ -82,4 +82,13 @@ const TableForm = ({ action, ...props }) => {
 	)
 }
 
+TableForm.propTypes = {
+	action: PropTypes.func.isRequired,
+	status: PropTypes.string.isRequired,
+	id: PropTypes.number.isRequired,
+	maxPeople: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	people: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	bill: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+}
+
 export default TableForm
