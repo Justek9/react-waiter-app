@@ -25,8 +25,8 @@ const TableForm = ({ action, ...props }) => {
 		} else setMaxPeople(e.target.value)
 	}
 
-	const handleSubmit = e => {
-		e.preventDefault()
+	const handleSubmit = () => {
+		// e.preventDefault()
 		action({ status, people, maxPeople, bill, id })
 	}
 

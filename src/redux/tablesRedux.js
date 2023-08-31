@@ -16,17 +16,20 @@ const EDIT_TABLE = createActionName('EDIT_TABLE')
 // action creators
 export const loadTables = payload => ({ type: LOAD_TABLES, payload })
 export const editTable = payload => ({ type: EDIT_TABLE, payload })
-export const editTableRequest = () => {
-	// return (dispatch)=>{
-	// 	const options = {
-	// 		method: "PATCH",
-	// 		headers: {
-	// 			"Contest-Type":"applcation/json"
-	// 		},
-	// 		body: JSON.stringify({})
-	// 	}
-	// 	fetch(`${URL}/id`, options).then(()=>dispatch(editTable()))
-	// }
+export const editTableRequest = table => {
+	return dispatch => {
+		const options = {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				...table,
+			}),
+		}
+		// fetch(`${URL}/${table.id}`, options).then(() => dispatch(fetchTables()))
+		fetch(`${URL}/${table.id}`, options).then(() => dispatch(editTable(table, table.id)))
+	}
 }
 
 export const fetchTables = () => {
