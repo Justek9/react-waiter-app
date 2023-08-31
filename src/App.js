@@ -5,6 +5,7 @@ import { Container } from 'react-bootstrap'
 import { Routes, Route } from 'react-router-dom'
 import ShowAllTables from './components/views/ShowAllTables'
 import EditTable from './components/features/EditTable'
+import Header from './components/views/Header'
 
 const App = () => {
 	const dispatch = useDispatch()
@@ -14,6 +15,7 @@ const App = () => {
 
 	return (
 		<Container>
+			<Header />
 			<Routes>
 				<Route path='/' element={<ShowAllTables />}></Route>
 				<Route path='/table/:id' element={<EditTable />}></Route>
