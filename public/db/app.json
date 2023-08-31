@@ -1,18 +1,18 @@
 {
   "tables": [
     {
-      "status": "Reserved",
-      "people": "4",
-      "maxPeople": 4,
-      "bill": "",
+      "status": "Busy",
+      "people": 0,
+      "maxPeople": "4",
+      "bill": 0,
       "id": 1
     },
     {
-      "id": 2,
       "status": "Busy",
+      "people": "6",
+      "maxPeople": "3",
       "bill": 45,
-      "maxPeople": 2,
-      "people": 1
+      "id": 2
     },
     {
       "id": 3,

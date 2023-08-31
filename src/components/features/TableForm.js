@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
@@ -13,26 +14,30 @@ const TableForm = ({ action, ...props }) => {
 
 	const statusArr = ['Busy', 'Cleaning', 'Free', 'Reserved']
 
-	const handlePeopleAmountChange = e => {
-		if (e.target.value > maxPeople) {
-			setPeopleAmount(people)
-		} else setPeopleAmount(e.target.value)
-	}
+	const {
+		register,
+		handleSubmit: validate,
+		formState: { errors },
+	} = useForm()
 
-	const handleMaxPeopleAmountChange = e => {
-		if (e.target.value > 10) {
-			setMaxPeople(maxPeople)
-		} else setMaxPeople(e.target.value)
-	}
+	useEffect(() => {
+		if (status === 'Free' || status === 'Cleaning') {
+			setPeopleAmount(0)
+			setBill(0)
+		}
+
+		if (maxPeople >= 0 && people > maxPeople) {
+			setPeopleAmount(maxPeople)
+		}
+	}, [status, people, maxPeople])
 
 	const handleSubmit = () => {
-		// e.preventDefault()
 		action({ status, people, maxPeople, bill, id })
 	}
 
 	return (
-		<Form onSubmit={handleSubmit}>
-			<Col xs='2'>
+		<Form onSubmit={validate(handleSubmit)}>
+			<Col xs='3'>
 				<Form.Group className='mb-3 d-flex flex-row align-items-center justify-content-between'>
 					<Form.Label>Status</Form.Label>
 					<Form.Select aria-label='Status' className='w-75' value={status} onChange={e => setStatus(e.target.value)}>
@@ -46,34 +51,47 @@ const TableForm = ({ action, ...props }) => {
 			<Col xs='3'>
 				<Form.Group className='mb-3 d-flex flex-row align-items-center justify-content-between'>
 					<Form.Label className='mr-2'>People:</Form.Label>
-					<Form.Control type='number' className='w-25' min='0' value={people} onChange={handlePeopleAmountChange} />
-					<span> / </span>
 					<Form.Control
+						{...register('people', { min: 0, max: { maxPeople } })}
 						type='number'
 						className='w-25'
-						min='0'
-						max='10'
+						value={people}
+						onChange={e => setPeopleAmount(e.target.value)}
+					/>
+
+					<span> / </span>
+					<Form.Control
+						{...register('maxPeople', { min: 0, max: 10 })}
+						type='number'
+						className='w-25'
 						value={maxPeople}
-						onChange={handleMaxPeopleAmountChange}
+						onChange={e => setMaxPeople(e.target.value)}
 					/>
 				</Form.Group>
+				{errors.people && (
+					<small className='d-block form-text text-danger my-2'>
+						Number of people can not be lower than 0 and greatar than max table amunt
+					</small>
+				)}
+				{errors.maxPeople && <small className='d-block form-text text-danger my-2'>Min value is 0, max 10</small>}
 			</Col>
 			<Col xs='3'>
 				{status === 'Busy' && (
-					<Form.Group className='mb-3 d-flex flex-row align-items-center justify-content-between'>
+					<Form.Group className='mb-3 d-flex flex-row align-items-center justify-content-around'>
 						<Form.Label>Bill:</Form.Label>
 						<div className='d-flex flex-row align-items-center'>
 							<span> $ </span>
 							<Form.Control
+								{...register('bill', { min: 0 })}
 								type='number'
 								className='w-50'
-								min='0'
 								value={bill}
 								onChange={e => setBill(e.target.value)}
 							/>
 						</div>
 					</Form.Group>
 				)}
+				{errors.bill && <small className='d-block form-text text-danger my-2'>Min value is 0</small>}
 			</Col>
 			<Button variant='primary' type='submit'>
 				Update
