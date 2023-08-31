@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { Container } from 'react-bootstrap'
 import { Routes, Route } from 'react-router-dom'
 import ShowAllTables from './components/views/ShowAllTables'
-import EditTableForm from './components/features/EditTableForm'
+import EditTable from './components/features/EditTable'
 
 const App = () => {
 	const dispatch = useDispatch()
@@ -16,7 +16,7 @@ const App = () => {
 		<Container>
 			<Routes>
 				<Route path='/' element={<ShowAllTables />}></Route>
-				<Route path='/table/:id' element={<EditTableForm />}></Route>
+				<Route path='/table/:id' element={<EditTable />}></Route>
 			</Routes>
 		</Container>
 	)

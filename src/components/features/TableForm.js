@@ -1,50 +1,83 @@
 import { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import PropTypes from 'prop-types'
 
 const TableForm = ({ action, ...props }) => {
 	const [status, setStatus] = useState(props.status || '')
 	const [maxPeople, setMaxPeople] = useState(props.maxPeople || '')
-	const [peopleAmount, setPeopleAmount] = useState(props.people || '')
+	const [people, setPeopleAmount] = useState(props.people || '')
 	const [bill, setBill] = useState(props.bill || '')
+	const [id] = useState(props.id)
+
+	const statusArr = ['Busy', 'Cleaning', 'Free', 'Reserved']
+
+	const handlePeopleAmountChange = e => {
+		if (e.target.value > maxPeople) {
+			setPeopleAmount(people)
+		} else setPeopleAmount(e.target.value)
+	}
+
+	const handleMaxPeopleAmountChange = e => {
+		if (e.target.value > 10) {
+			setMaxPeople(maxPeople)
+		} else setMaxPeople(e.target.value)
+	}
+
+	const handleSubmit = e => {
+		e.preventDefault()
+		action({ status, people, maxPeople, bill, id })
+	}
 
 	return (
-		<Form>
-			<Row>
-				<Col xs='12'>
-					<Form.Group className='mb-3'>
-						<Form.Label>Status</Form.Label>
-						<Form.Select aria-label='Status' value={status} onChange={e => setStatus(e.target.value)}>
-							{status.map((status, i) => {
-								return <option key={i}>{status}</option>
-							})}
-						</Form.Select>
-					</Form.Group>
-				</Col>
+		<Form onSubmit={handleSubmit}>
+			<Col xs='2'>
+				<Form.Group className='mb-3 d-flex flex-row align-items-center justify-content-between'>
+					<Form.Label>Status</Form.Label>
+					<Form.Select aria-label='Status' className='w-75' value={status} onChange={e => setStatus(e.target.value)}>
+						{statusArr.map((status, i) => {
+							return <option key={i}>{status}</option>
+						})}
+					</Form.Select>
+				</Form.Group>
+			</Col>
 
-				<Col xs='12'>
-					<Form.Group className='mb-3'>
-						<Form.Label>People</Form.Label>
-						<Form.Control as='number' value={peopleAmount} onChange={e => setPeopleAmount(e.target.value)} />
-					</Form.Group>
-				</Col>
-				<Col xs='12'>
-					<Form.Group className='mb-3'>
-						<Form.Control as='number' value={maxPeople} onChange={e => setMaxPeople(e.target.value)} />
-					</Form.Group>
-				</Col>
-				<Col xs='12'>
-					<Form.Group className='mb-3'>
+			<Col xs='3'>
+				<Form.Group className='mb-3 d-flex flex-row align-items-center justify-content-between'>
+					<Form.Label className='mr-2'>People:</Form.Label>
+					<Form.Control type='number' className='w-25' min='0' value={people} onChange={handlePeopleAmountChange} />
+					<span> / </span>
+					<Form.Control
+						type='number'
+						className='w-25'
+						min='0'
+						max='10'
+						value={maxPeople}
+						onChange={handleMaxPeopleAmountChange}
+					/>
+				</Form.Group>
+			</Col>
+			<Col xs='3'>
+				{status === 'Busy' && (
+					<Form.Group className='mb-3 d-flex flex-row align-items-center justify-content-between'>
 						<Form.Label>Bill:</Form.Label>
-						<Form.Control as='number' value={bill} onChange={e => setBill(e.target.value)} />
+						<div className='d-flex flex-row align-items-center'>
+							<span> $ </span>
+							<Form.Control
+								type='number'
+								className='w-50'
+								min='0'
+								value={bill}
+								onChange={e => setBill(e.target.value)}
+							/>
+						</div>
 					</Form.Group>
-				</Col>
-			</Row>
-
-			<Button variant='primary'>Update</Button>
+				)}
+			</Col>
+			<Button variant='primary' type='submit'>
+				Update
+			</Button>
 		</Form>
 	)
 }

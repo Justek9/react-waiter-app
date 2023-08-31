@@ -9,23 +9,26 @@ const EditTableForm = () => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 
-	const handleSubit = table => {
-		dispatch(editTable(...table, id))
+	const handleSubmit = table => {
+		dispatch(editTable({ ...table }, Number(id)))
 		navigate('/')
 	}
 
 	if (!table) return <Navigate to='/' />
-	else
-		return (
+
+	return (
+		<>
+			<h2 className='mb-3'>Table: {table.id}</h2>
 			<TableForm
-				action={handleSubit}
+				action={handleSubmit}
 				status={table.status}
 				id={table.id}
 				maxPeople={table.maxPeople}
 				people={table.people}
 				bill={table.bill}
 			/>
-		)
+		</>
+	)
 }
 
 export default EditTableForm

@@ -5,7 +5,7 @@ export const getAllTables = ({ tables }) => {
 }
 
 export const getTableById = ({ tables }, id) => {
-	return tables.filter(table => table.id === id)[0]
+	return tables.filter(table => table.id === Number(id))[0]
 }
 
 // actions
