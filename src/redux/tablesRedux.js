@@ -1,5 +1,4 @@
 //selectors
-const URL = 'http://localhost:3131/tables'
 export const getAllTables = ({ tables }) => {
 	return tables
 }
@@ -12,10 +11,15 @@ export const getTableById = ({ tables }, id) => {
 const createActionName = actionName => `app/tables/${actionName}`
 const LOAD_TABLES = createActionName('LOAD_TABLES')
 const EDIT_TABLE = createActionName('EDIT_TABLE')
+const DELETE_TABLE = createActionName('DELETE_TABLE')
 
 // action creators
 export const loadTables = payload => ({ type: LOAD_TABLES, payload })
 export const editTable = payload => ({ type: EDIT_TABLE, payload })
+export const deleteTable = payload => ({ type: DELETE_TABLE, payload })
+
+const URL = 'http://localhost:3131/tables'
+
 export const editTableRequest = table => {
 	return dispatch => {
 		const options = {
@@ -27,8 +31,16 @@ export const editTableRequest = table => {
 				...table,
 			}),
 		}
-		// fetch(`${URL}/${table.id}`, options).then(() => dispatch(fetchTables()))
 		fetch(`${URL}/${table.id}`, options).then(() => dispatch(editTable(table, table.id)))
+	}
+}
+
+export const deleteTableRequest = table => {
+	return dispatch => {
+		const options = {
+			method: 'DELETE',
+		}
+		fetch(`${URL}/${table.id}`, options).then(() => dispatch(deleteTable(table.id)))
 	}
 }
 
@@ -46,6 +58,9 @@ const tablesReducer = (statePart = [], action) => {
 			return [...action.payload]
 		case EDIT_TABLE:
 			return statePart.map(table => (table.id === action.payload.id ? { ...table, ...action.payload } : table))
+		case DELETE_TABLE:
+			console.log(action.payload)
+			return statePart.filter(table => table.id !== action.payload)
 		default:
 			return statePart
 	}

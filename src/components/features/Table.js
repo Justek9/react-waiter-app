@@ -1,9 +1,13 @@
+import { useState } from 'react'
 import Card from 'react-bootstrap/esm/Card'
 import Row from 'react-bootstrap/esm/Row'
 import Button from 'react-bootstrap/Button'
 import { NavLink } from 'react-router-dom'
+import DeleteModal from './DeleteModal'
 
 const Table = ({ table }) => {
+	const [modalShow, setModalShow] = useState(false)
+
 	return (
 		<Row>
 			<Card className='border-0 border-bottom d-flex flex-row align-items-center justify-content-between'>
@@ -15,9 +19,13 @@ const Table = ({ table }) => {
 					</Card.Text>
 				</Card.Body>
 
-				<Button variant='primary' as={NavLink} to={`/table/${table.id}`}>
+				<Button variant='primary' className='mr-2' as={NavLink} to={`/table/${table.id}`}>
 					Show more
 				</Button>
+				<Button variant='danger' onClick={() => setModalShow(true)}>
+					Delete
+				</Button>
+				<DeleteModal table={table} show={modalShow} onHide={() => setModalShow(false)} />
 			</Card>
 		</Row>
 	)
