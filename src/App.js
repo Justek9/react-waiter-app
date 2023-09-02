@@ -8,6 +8,7 @@ import EditTable from './components/features/EditTable'
 import Header from './components/views/Header'
 import NotFound from './components/pages/NotFound'
 import AddTable from './components/pages/AddTable'
+import Footer from './components/views/Footer'
 
 const App = () => {
 	const dispatch = useDispatch()
@@ -24,6 +25,7 @@ const App = () => {
 				<Route path='/table/add' element={<AddTable />}></Route>
 				<Route path='/*' element={<NotFound />}></Route>
 			</Routes>
+			<Footer />
 		</Container>
 	)
 }
