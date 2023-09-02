@@ -8,8 +8,8 @@ const AllTables = () => {
 
 	return (
 		<Row>
-			{tables.map(table => (
-				<Table key={table.id} table={table}></Table>
+			{tables.map((table, i) => (
+				<Table key={table.id} table={table} i={i}></Table>
 			))}
 		</Row>
 	)

@@ -21,6 +21,7 @@ const EditTableForm = () => {
 			<h2 className='mb-3'>Table: {table.id}</h2>
 			<TableForm
 				action={handleSubmit}
+				actionText='Update'
 				status={table.status}
 				id={table.id}
 				maxPeople={table.maxPeople}

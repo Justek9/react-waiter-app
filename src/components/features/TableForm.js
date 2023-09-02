@@ -5,14 +5,14 @@ import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import PropTypes from 'prop-types'
 
-const TableForm = ({ action, ...props }) => {
+const TableForm = ({ action, actionText, ...props }) => {
 	const [status, setStatus] = useState(props.status || '')
 	const [maxPeople, setMaxPeople] = useState(props.maxPeople || '')
 	const [people, setPeopleAmount] = useState(props.people || '')
 	const [bill, setBill] = useState(props.bill || '')
 	const [id] = useState(props.id)
 
-	const statusArr = ['Busy', 'Cleaning', 'Free', 'Reserved']
+	const statusArr = ['Free', 'Busy', 'Cleaning', 'Reserved']
 
 	const {
 		register,
@@ -22,8 +22,8 @@ const TableForm = ({ action, ...props }) => {
 
 	useEffect(() => {
 		if (status === 'Free' || status === 'Cleaning') {
-			setPeopleAmount(0)
 			setBill(0)
+			setPeopleAmount(0)
 		}
 
 		if (maxPeople >= 0 && people > maxPeople) {
@@ -41,8 +41,13 @@ const TableForm = ({ action, ...props }) => {
 				<Form.Group className='mb-3 d-flex flex-row align-items-center justify-content-between'>
 					<Form.Label>Status</Form.Label>
 					<Form.Select aria-label='Status' className='w-75' value={status} onChange={e => setStatus(e.target.value)}>
+						<option value=''>--Please choose an option--</option>
 						{statusArr.map((status, i) => {
-							return <option key={i}>{status}</option>
+							return (
+								<option key={i} value={status}>
+									{status}
+								</option>
+							)
 						})}
 					</Form.Select>
 				</Form.Group>
@@ -70,7 +75,7 @@ const TableForm = ({ action, ...props }) => {
 				</Form.Group>
 				{errors.people && (
 					<small className='d-block form-text text-danger my-2'>
-						Number of people can not be lower than 0 and greatar than max table amunt
+						Number of people can not be lower than 0 and greater than max table amunt
 					</small>
 				)}
 				{errors.maxPeople && <small className='d-block form-text text-danger my-2'>Min value is 0, max 10</small>}
@@ -94,7 +99,7 @@ const TableForm = ({ action, ...props }) => {
 				{errors.bill && <small className='d-block form-text text-danger my-2'>Min value is 0</small>}
 			</Col>
 			<Button variant='primary' type='submit'>
-				Update
+				{actionText}
 			</Button>
 		</Form>
 	)
@@ -102,6 +107,7 @@ const TableForm = ({ action, ...props }) => {
 
 TableForm.propTypes = {
 	action: PropTypes.func.isRequired,
+	actionText: PropTypes.string.isRequired,
 	status: PropTypes.string.isRequired,
 	id: PropTypes.number.isRequired,
 	maxPeople: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
