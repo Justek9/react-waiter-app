@@ -5,7 +5,7 @@ import TableForm from './TableForm'
 
 const EditTableForm = () => {
 	const { id } = useParams()
-	const table = useSelector(state => getTableById(state, id))
+	const table = useSelector(state => getTableById(state, Number(id)))
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 

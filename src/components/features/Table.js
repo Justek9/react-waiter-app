@@ -4,13 +4,9 @@ import Row from 'react-bootstrap/esm/Row'
 import Button from 'react-bootstrap/Button'
 import { NavLink } from 'react-router-dom'
 import DeleteModal from './DeleteModal'
-import { getAllTables } from '../../redux/tablesRedux'
-import { useSelector } from 'react-redux'
 
 const Table = ({ table, i }) => {
 	const [modalShow, setModalShow] = useState(false)
-	const tables = useSelector(state => getAllTables(state))
-	console.log(tables.length)
 
 	return (
 		<Row>
@@ -23,7 +19,7 @@ const Table = ({ table, i }) => {
 					</Card.Text>
 				</Card.Body>
 
-				<Button variant='primary' className='mr-2' as={NavLink} to={`/table/${table.id}`}>
+				<Button variant='primary' className='mr-1' as={NavLink} to={`/tables/${table.id}`}>
 					Show more
 				</Button>
 				<Button variant='danger' onClick={() => setModalShow(true)}>

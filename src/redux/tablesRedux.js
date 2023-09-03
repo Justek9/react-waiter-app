@@ -1,4 +1,6 @@
 import shortid from 'shortid'
+import { setLoading } from './isLoadingRedux'
+import { setError } from './errorRedux'
 
 //selectors
 export const getAllTables = ({ tables }) => {
@@ -63,9 +65,18 @@ export const addTableRequest = table => {
 
 export const fetchTables = () => {
 	return dispatch => {
+		dispatch(setLoading(true))
 		fetch(URL)
 			.then(res => res.json())
-			.then(tables => dispatch(loadTables(tables)))
+			.then(tables => {
+				dispatch(setLoading(false))
+				dispatch(loadTables(tables))
+			})
+			.catch(error => {
+				console.error(error)
+				dispatch(setLoading(false))
+				dispatch(setError(true))
+			})
 	}
 }
 

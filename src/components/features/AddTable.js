@@ -1,4 +1,4 @@
-import AddTableForm from '../features/AddTableForm'
+import AddTableForm from './AddTableForm'
 
 const AddTable = () => {
 	return (

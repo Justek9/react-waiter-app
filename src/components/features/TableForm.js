@@ -108,8 +108,8 @@ const TableForm = ({ action, actionText, ...props }) => {
 TableForm.propTypes = {
 	action: PropTypes.func.isRequired,
 	actionText: PropTypes.string.isRequired,
-	status: PropTypes.string.isRequired,
-	id: PropTypes.number.isRequired,
+	status: PropTypes.string,
+	id: PropTypes.number,
 	maxPeople: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	people: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	bill: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

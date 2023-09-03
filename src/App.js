@@ -7,7 +7,7 @@ import Home from './components/views/Home'
 import EditTable from './components/features/EditTable'
 import Header from './components/views/Header'
 import NotFound from './components/pages/NotFound'
-import AddTable from './components/pages/AddTable'
+import AddTable from './components/features/AddTable'
 import Footer from './components/views/Footer'
 
 const App = () => {
@@ -21,7 +21,7 @@ const App = () => {
 			<Header />
 			<Routes>
 				<Route path='/' element={<Home />}></Route>
-				<Route path='/table/:id' element={<EditTable />}></Route>
+				<Route path='/tables/:id' element={<EditTable />}></Route>
 				<Route path='/table/add' element={<AddTable />}></Route>
 				<Route path='/*' element={<NotFound />}></Route>
 			</Routes>

@@ -1,12 +1,16 @@
-import AllTables from '../features/AllTables'
+import AllTables from '../pages/AllTables'
 import Spinner from 'react-bootstrap/Spinner'
+import Button from 'react-bootstrap/Button'
 import { useSelector } from 'react-redux'
 import { getAllTables } from '../../redux/tablesRedux'
-import Button from 'react-bootstrap/Button'
 import { NavLink } from 'react-router-dom'
+import { getIsLoading } from '../../redux/isLoadingRedux'
+import { getIsError } from '../../redux/errorRedux'
 
 const Home = () => {
 	const tables = useSelector(state => getAllTables(state))
+	const isLoading = useSelector(state => getIsLoading(state))
+	const isError = useSelector(state => getIsError(state))
 
 	return (
 		<>
@@ -16,7 +20,9 @@ const Home = () => {
 					Add table
 				</Button>
 			</div>
-			{tables.length === 0 ? <Spinner animation='border' variant='primary' /> : <AllTables />}
+			{isLoading ? <Spinner animation='border' variant='primary' /> : <AllTables />}
+			{tables.length === 0 && <p>Nothing to show...</p>}
+			{isError && <p>Error occured while fetching data...</p>}
 		</>
 	)
 }
