@@ -6,7 +6,6 @@ import TableForm from './TableForm'
 const EditTableForm = () => {
 	const { id } = useParams()
 	const table = useSelector(state => getTableById(state, Number(id)))
-	const tables = useSelector(state => getAllTables(state))
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 
@@ -19,7 +18,7 @@ const EditTableForm = () => {
 
 	return (
 		<>
-			<h2 className='mb-3'>Table: {tables.indexOf(table)+1}</h2>
+			<h2 className='mb-3'>Table: {table.id}</h2>
 			<TableForm
 				action={handleSubmit}
 				actionText='Update'

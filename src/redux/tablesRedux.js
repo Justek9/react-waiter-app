@@ -1,4 +1,3 @@
-import shortid from 'shortid'
 import { setLoading } from './isLoadingRedux'
 import { setError } from './errorRedux'
 import { API_URL } from '../config'
@@ -90,7 +89,7 @@ const tablesReducer = (statePart = [], action) => {
 			return statePart.filter(table => table.id !== action.payload)
 		case ADD_TABLE:
 			console.log(statePart)
-			return [...statePart, { ...action.payload, id: shortid() }]
+			return [...statePart, { ...action.payload }]
 		default:
 			return statePart
 	}
