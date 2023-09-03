@@ -57,7 +57,11 @@ export const addTableRequest = table => {
 			},
 			body: JSON.stringify(table),
 		}
-		fetch(`${API_URL}/tables`, options).then(() => dispatch(addTable(table)))
+		fetch(`${API_URL}/tables`, options)
+			.then(() => {
+				dispatch(addTable(table))
+			})
+			.then(() => dispatch(fetchTables))
 	}
 }
 
@@ -85,10 +89,8 @@ const tablesReducer = (statePart = [], action) => {
 		case EDIT_TABLE:
 			return statePart.map(table => (table.id === action.payload.id ? { ...table, ...action.payload } : table))
 		case DELETE_TABLE:
-			console.log(statePart)
 			return statePart.filter(table => table.id !== action.payload)
 		case ADD_TABLE:
-			console.log(statePart)
 			return [...statePart, { ...action.payload }]
 		default:
 			return statePart

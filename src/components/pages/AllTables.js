@@ -9,8 +9,8 @@ const AllTables = () => {
 	return (
 		<>
 			<Row>
-				{tables.map(table => (
-					<Table key={table.id} table={table}></Table>
+				{tables.map((table, i) => (
+					<Table key={i} table={table}></Table>
 				))}
 			</Row>
 		</>

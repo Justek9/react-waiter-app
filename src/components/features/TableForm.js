@@ -31,7 +31,8 @@ const TableForm = ({ action, actionText, ...props }) => {
 		}
 	}, [status, people, maxPeople])
 
-	const handleSubmit = () => {
+	const handleSubmit = (_, event) => {
+		event.preventDefault()
 		action({ status, people, maxPeople, bill, id })
 	}
 
