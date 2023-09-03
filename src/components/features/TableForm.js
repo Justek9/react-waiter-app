@@ -37,7 +37,7 @@ const TableForm = ({ action, actionText, ...props }) => {
 
 	return (
 		<Form onSubmit={validate(handleSubmit)}>
-			<Col xs='3'>
+			<Col xs={6} md={3}>
 				<Form.Group className='mb-3 d-flex flex-row align-items-center justify-content-between'>
 					<Form.Label>Status</Form.Label>
 					<Form.Select aria-label='Status' className='w-75' value={status} onChange={e => setStatus(e.target.value)}>
@@ -53,7 +53,7 @@ const TableForm = ({ action, actionText, ...props }) => {
 				</Form.Group>
 			</Col>
 
-			<Col xs='3'>
+			<Col xs={6} md={3}>
 				<Form.Group className='mb-3 d-flex flex-row align-items-center justify-content-between'>
 					<Form.Label className='mr-2'>People:</Form.Label>
 					<Form.Control
@@ -80,7 +80,7 @@ const TableForm = ({ action, actionText, ...props }) => {
 				)}
 				{errors.maxPeople && <small className='d-block form-text text-danger my-2'>Min value is 0, max 10</small>}
 			</Col>
-			<Col xs='3'>
+			<Col xs={6} md={3}>
 				{status === 'Busy' && (
 					<Form.Group className='mb-3 d-flex flex-row align-items-center justify-content-around'>
 						<Form.Label>Bill:</Form.Label>

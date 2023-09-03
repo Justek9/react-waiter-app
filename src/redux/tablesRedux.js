@@ -1,6 +1,7 @@
 import shortid from 'shortid'
 import { setLoading } from './isLoadingRedux'
 import { setError } from './errorRedux'
+import { API_URL } from '../config'
 
 //selectors
 export const getAllTables = ({ tables }) => {
@@ -24,8 +25,6 @@ export const editTable = payload => ({ type: EDIT_TABLE, payload })
 export const deleteTable = payload => ({ type: DELETE_TABLE, payload })
 export const addTable = payload => ({ type: ADD_TABLE, payload })
 
-const URL = 'http://localhost:3131/tables'
-
 export const editTableRequest = table => {
 	return dispatch => {
 		const options = {
@@ -37,7 +36,7 @@ export const editTableRequest = table => {
 				...table,
 			}),
 		}
-		fetch(`${URL}/${table.id}`, options).then(() => dispatch(editTable(table, table.id)))
+		fetch(`${API_URL}/tables/${table.id}`, options).then(() => dispatch(editTable(table, table.id)))
 	}
 }
 
@@ -46,7 +45,7 @@ export const deleteTableRequest = table => {
 		const options = {
 			method: 'DELETE',
 		}
-		fetch(`${URL}/${table.id}`, options).then(() => dispatch(deleteTable(table.id)))
+		fetch(`${API_URL}/tables/${table.id}`, options).then(() => dispatch(deleteTable(table.id)))
 	}
 }
 
@@ -59,14 +58,14 @@ export const addTableRequest = table => {
 			},
 			body: JSON.stringify(table),
 		}
-		fetch(`${URL}`, options).then(() => dispatch(addTable(table)))
+		fetch(`${API_URL}/tables`, options).then(() => dispatch(addTable(table)))
 	}
 }
 
 export const fetchTables = () => {
 	return dispatch => {
 		dispatch(setLoading(true))
-		fetch(URL)
+		fetch(`${API_URL}/tables`)
 			.then(res => res.json())
 			.then(tables => {
 				dispatch(setLoading(false))

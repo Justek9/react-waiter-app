@@ -1,7 +1,7 @@
 import Table from '../features/Table'
+import Row from 'react-bootstrap/esm/Row'
 import { useSelector } from 'react-redux'
 import { getAllTables } from '../../redux/tablesRedux'
-import Row from 'react-bootstrap/esm/Row'
 
 const AllTables = () => {
 	const tables = useSelector(state => getAllTables(state))

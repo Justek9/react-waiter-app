@@ -7,7 +7,7 @@ const NavBar = () => {
 			<Nav.Link className='text-white' as={NavLink} to='/'>
 				Waiter.app
 			</Nav.Link>
-			<Nav.Link className='text-white active' as={NavLink} to='/'>
+			<Nav.Link className='text-white' as={NavLink} to='/'>
 				Home
 			</Nav.Link>
 		</Nav>

@@ -1,4 +1,4 @@
-import AllTables from '../pages/AllTables'
+import AllTables from './AllTables'
 import Spinner from 'react-bootstrap/Spinner'
 import Button from 'react-bootstrap/Button'
 import { useSelector } from 'react-redux'
@@ -20,9 +20,10 @@ const Home = () => {
 					Add table
 				</Button>
 			</div>
-			{isLoading ? <Spinner animation='border' variant='primary' /> : <AllTables />}
-			{tables.length === 0 && <p>Nothing to show...</p>}
 			{isError && <p>Error occured while fetching data...</p>}
+			{tables.length === 0 && !isLoading && <p>Nothing to show...</p>}
+			{isLoading && <Spinner animation='border' variant='primary' />}
+			{!isLoading && !isError && <AllTables />}
 		</>
 	)
 }

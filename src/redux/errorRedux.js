@@ -1,6 +1,5 @@
 // selectors
 export const getIsError = ({ error }) => {
-	console.log(error)
 	return error
 }
 

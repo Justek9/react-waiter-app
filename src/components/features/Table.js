@@ -19,7 +19,7 @@ const Table = ({ table, i }) => {
 					</Card.Text>
 				</Card.Body>
 
-				<Button variant='primary' className='mr-1' as={NavLink} to={`/tables/${table.id}`}>
+				<Button variant='primary' as={NavLink} to={`/tables/${table.id}`}>
 					Show more
 				</Button>
 				<Button variant='danger' onClick={() => setModalShow(true)}>
