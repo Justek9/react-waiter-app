@@ -34,6 +34,20 @@
       "maxPeople": "2",
       "bill": 0,
       "id": 5
+    },
+    {
+      "status": "",
+      "people": "",
+      "maxPeople": "",
+      "bill": "",
+      "id": 6
+    },
+    {
+      "status": "Cleaning",
+      "people": 0,
+      "maxPeople": "",
+      "bill": 0,
+      "id": 7
     }
   ]
 }
