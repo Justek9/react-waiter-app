@@ -27,13 +27,6 @@
       "maxPeople": "",
       "bill": 0,
       "id": 4
-    },
-    {
-      "status": "Cleaning",
-      "people": 0,
-      "maxPeople": "",
-      "bill": 0,
-      "id": 5
     }
   ]
 }

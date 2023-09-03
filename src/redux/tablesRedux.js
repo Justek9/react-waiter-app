@@ -61,7 +61,9 @@ export const addTableRequest = table => {
 			.then(() => {
 				dispatch(addTable(table))
 			})
-			.then(() => dispatch(fetchTables))
+			.then(() => {
+				dispatch(fetchTables())
+			})
 	}
 }
 
